@@ -1,16 +1,27 @@
-localStorage.clear();
 const taskInput = document.getElementById("taskInput");
 const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
 const completedTasks = document.getElementById("completedTasks");
 const totalTasks = document.getElementById("totalTasks");
 const progress = document.getElementById("progress");
+const filterButtons = document.querySelectorAll(".filter-btn");
+let currentFilter = "all";
 let tasks = [];
 addBtn.addEventListener("click", addTask);
 taskInput.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
         addTask();
     }
+});
+filterButtons.forEach(function(button){
+   button.addEventListener("click",function(){
+      filterButtons.forEach(btn=>{
+            btn.classList.remove("active");
+        });
+        button.classList.add("active");
+        currentFilter = button.dataset.filter;
+        filterTasks();
+    });
 });
 
 function addTask() {
@@ -71,6 +82,7 @@ function createTask(task) {
 function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     updateProgress();
+    filterTasks();
 }
 function updateProgress() {
    const total = tasks.length;
@@ -83,6 +95,21 @@ function updateProgress() {
     else {
         progress.style.width = (completed / total) * 100 + "%";
     }
+}
+function filterTasks(){
+   const taskItems = taskList.querySelectorAll("li");
+    taskItems.forEach(function(li,index){
+        const task = tasks[index];
+        if(currentFilter==="all"){
+            li.style.display="flex";
+        }
+        else if(currentFilter==="active"){
+        li.style.display = task.completed ? "none" : "flex";
+        }
+         else if(currentFilter==="completed"){
+          li.style.display = task.completed ? "flex" : "none";
+      }
+    });
 }
 function loadTasks() {
    const savedTasks = JSON.parse(localStorage.getItem("tasks"));

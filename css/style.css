@@ -123,3 +123,25 @@ button i{
     gap:10px;
     margin-bottom:20px;
 }
+.filters{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:20px;
+}
+.filter-btn{
+    background:white;
+    color:#B58DB6;
+    border:2px solid #B58DB6;
+    padding:8px 16px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.filter-btn:hover{
+    background:#EAD7D1;
+}
+.filter-btn.active{
+    background:#B58DB6;
+    color:white;
+}
