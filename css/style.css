@@ -169,3 +169,32 @@ button i{
     line-height:1.6;
     font-size:16px;
 }
+@media (max-width: 600px){
+   .container{
+        width:90%;
+        padding:20px;
+    }
+    .input-section{
+        flex-direction:column;
+    }
+    #taskInput{
+        width:100%;
+        box-sizing:border-box;
+    }
+    #addBtn{
+        width:100%;
+    }
+    .filters{
+        flex-wrap:wrap;
+    }
+    .filter-btn{
+        flex:1;
+    }
+}
+.icon-btn{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    color: #B58DB6;
+}

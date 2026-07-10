@@ -46,11 +46,7 @@ function createTask(task) {
    const li = document.createElement("li");
     const checkBtn = document.createElement("button");
     checkBtn.innerHTML = '<i class="fa-regular fa-circle"></i>';
-    checkBtn.style.border = "none";
-    checkBtn.style.background = "transparent";
-    checkBtn.style.cursor = "pointer";
-    checkBtn.style.fontSize = "18px";
-    checkBtn.style.color = "#B58DB6";
+    checkBtn.classList.add("icon-btn");
     const span = document.createElement("span");
     span.textContent = task.text;
     if (task.completed) {
