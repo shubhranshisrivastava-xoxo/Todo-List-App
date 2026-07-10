@@ -1,6 +1,10 @@
+localStorage.clear();
 const taskInput = document.getElementById("taskInput");
 const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
+const completedTasks = document.getElementById("completedTasks");
+const totalTasks = document.getElementById("totalTasks");
+const progress = document.getElementById("progress");
 let tasks = [];
 addBtn.addEventListener("click", addTask);
 taskInput.addEventListener("keypress", function (event) {
@@ -65,7 +69,20 @@ function createTask(task) {
 
 }
 function saveTasks() {
-   localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    updateProgress();
+}
+function updateProgress() {
+   const total = tasks.length;
+   const completed = tasks.filter(task => task.completed).length;
+   totalTasks.textContent = total;
+    completedTasks.textContent = completed;
+    if (total === 0) {
+        progress.style.width = "0%";
+    }
+    else {
+        progress.style.width = (completed / total) * 100 + "%";
+    }
 }
 function loadTasks() {
    const savedTasks = JSON.parse(localStorage.getItem("tasks"));
@@ -74,7 +91,15 @@ function loadTasks() {
         tasks.forEach(function (task) {
             createTask(task);
         });
+        updateProgress();
     }
-
 }
 loadTasks();
+const today = new Date();
+document.getElementById("date").textContent =
+today.toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+});
