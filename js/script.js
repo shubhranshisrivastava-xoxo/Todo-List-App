@@ -6,6 +6,7 @@ const totalTasks = document.getElementById("totalTasks");
 const progress = document.getElementById("progress");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const clearCompletedBtn = document.getElementById("clearCompletedBtn");
+const emptyState = document.getElementById("emptyState");
 let currentFilter = "all";
 let tasks = [];
 addBtn.addEventListener("click", addTask);
@@ -85,6 +86,7 @@ function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     updateProgress();
     filterTasks();
+    updateEmptyState();
 }
 function updateProgress() {
    const total = tasks.length;
@@ -96,6 +98,16 @@ function updateProgress() {
     }
     else {
         progress.style.width = (completed / total) * 100 + "%";
+    }
+}
+function updateEmptyState(){
+   if(tasks.length===0){
+        emptyState.style.display="block";
+        taskList.style.display="none";
+    }
+    else{
+        emptyState.style.display="none";
+        taskList.style.display="block";
     }
 }
 function clearCompleted() {
@@ -129,6 +141,7 @@ function loadTasks() {
             createTask(task);
         });
         updateProgress();
+        updateEmptyState();
     }
 }
 loadTasks();
