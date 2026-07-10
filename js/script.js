@@ -5,6 +5,7 @@ const completedTasks = document.getElementById("completedTasks");
 const totalTasks = document.getElementById("totalTasks");
 const progress = document.getElementById("progress");
 const filterButtons = document.querySelectorAll(".filter-btn");
+const clearCompletedBtn = document.getElementById("clearCompletedBtn");
 let currentFilter = "all";
 let tasks = [];
 addBtn.addEventListener("click", addTask);
@@ -23,6 +24,7 @@ filterButtons.forEach(function(button){
         filterTasks();
     });
 });
+clearCompletedBtn.addEventListener("click", clearCompleted);
 
 function addTask() {
     const taskText = taskInput.value.trim();
@@ -95,6 +97,14 @@ function updateProgress() {
     else {
         progress.style.width = (completed / total) * 100 + "%";
     }
+}
+function clearCompleted() {
+   tasks = tasks.filter(task => !task.completed);
+   taskList.innerHTML = "";
+   tasks.forEach(function(task){
+        createTask(task);
+    });
+   saveTasks();
 }
 function filterTasks(){
    const taskItems = taskList.querySelectorAll("li");

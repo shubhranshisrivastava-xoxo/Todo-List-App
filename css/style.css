@@ -145,3 +145,20 @@ button i{
     background:#B58DB6;
     color:white;
 }
+.task-actions{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:15px;
+}
+#clearCompletedBtn{
+    background:#B58DB6;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+#clearCompletedBtn:hover{
+    background:#9d75a0;
+}
